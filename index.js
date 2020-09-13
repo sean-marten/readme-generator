@@ -1,122 +1,29 @@
-const inquirer = require("inquirer");
 const axios = require("axios");
 const fs = require("fs");
-const readmeContent = [
-  {
-    headingLevel: 1,
-    heading: "Title",
-  },
-  {
-    headingLevel: 2,
-    heading: "Description",
-  },
-  {
-    headingLevel: 2,
-    heading: "Installation",
-  },
-  {
-    headingLevel: 2,
-    heading: "Usage",
-  },
-  {
-    headingLevel: 2,
-    heading: "License",
-  },
-  {
-    headingLevel: 2,
-    heading: "Credits",
-  },
-  {
-    headingLevel: 2,
-    heading: "Contributing",
-  },
-  {
-    headingLevel: 2,
-    heading: "Tests",
-  },
-  {
-    headingLevel: 2,
-    heading: "Questions",
-  },
-];
+const inquirer = require("inquirer");
 
-const userPrompts = [
-  {
-    type: "input",
-    name: "username",
-    message: "What is your GitHub username?",
-  },
-  {
-    type: "input",
-    name: "repoName",
-    message: "What is the name of the repository for this readme?",
-  },
-  {
-    type: "input",
-    name: "authToken",
-    message: "Please enter a valid Github Auth token.",
-  },
-  {
-    type: "confirm",
-    name: "includeTOC",
-    message: "Would you like to include a table of contents?",
-  },
-  {
-    type: "input",
-    name: "title",
-    message: "What is the title of your project?",
-  },
-  // {
-  //   type: "editor",
-  //   name: "description",
-  //   message: "Write out the description for your ReadMe.",
-  // },
-  // {
-  //   type: "editor",
-  //   name: "installation",
-  //   message: "Please describe how to install your application.",
-  // },
-  // {
-  //   type: "editor",
-  //   name: "usage",
-  //   message: "Describe how to use your application.",
-  // },
-  // {
-  //   type: "editor",
-  //   name: "credits",
-  //   message:
-  //     "List all of your collaborators. Include any noteworthy third-party assets or tutorials.",
-  // },
-  // {
-  //   type: "editor",
-  //   name: "license",
-  //   message:
-  //     "Describe what other developers can and cannot do with your project.",
-  // },
-  // {
-  //   type: "editor",
-  //   name: "contributing",
-  //   message: "Write out how other developers may contribute to your project.",
-  // },
-  // {
-  //   type: "editor",
-  //   name: "tests",
-  //   message: "Provide examples for how to run your tests.",
-  // },
-];
+const { readmeContent, userPrompts } = require("./constants");
 
-inquirer.prompt(userPrompts).then((answers) => {
-  const answerArr = Object.values(answers);
-  for (let i = 4; i < answerArr.length; i++) {
-    readmeContent[i - 4].content = answerArr[i];
-  }
-  fs.writeFile("./readme/README.md", "", (err) => {
-    if (err) {
-      throw err;
+init();
+
+function init() {
+  promptUser();
+}
+
+function promptUser() {
+  inquirer.prompt(userPrompts).then((answers) => {
+    const answerArr = Object.values(answers);
+    for (let i = 4; i < answerArr.length; i++) {
+      readmeContent[i - 4].content = answerArr[i];
     }
+    fs.writeFile("./readme/README.md", "", (err) => {
+      if (err) {
+        console.log(`Failed to generate README.md file, ${err}`);
+      }
+    });
+    getUserInfo(answerArr[0], answerArr[1], answerArr[2]);
   });
-  getUserInfo(answerArr[0], answerArr[1], answerArr[2]);
-});
+}
 
 async function getUserInfo(username, repoName, authToken) {
   var config = {
@@ -126,20 +33,18 @@ async function getUserInfo(username, repoName, authToken) {
   };
   const queryUrl = `https://api.github.com/users/${username}`;
   try {
-    const { data } = await axios.get(queryUrl, config);
-    console.log(data);
-    if (data.avatar_url && data.email) {
-      readmeContent[8].content = `\nIf you have any questions, please contact me at ${data.email}\n\n![screenshot](${data.avatar_url})`;
+    const { avatar_url, email } = await axios.get(queryUrl, config);
+    if (avatar_url && email) {
+      readmeContent[8].content = `\nIf you have any questions, please contact me at ${email}\n\n![screenshot](${avatar_url})`;
     }
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log(`Unable to retrieve Github user content, ${err}`);
   }
 
   writeToFile(username, repoName);
 }
 
 function writeToFile(username, repoName) {
-  console.log(readmeContent);
   readmeContent.forEach((item) => {
     if (item.heading === "Installation") {
       let tcContent = "## Table of Contents\n";
