@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/sean-marten/readme-generator#readme",
   "dependencies": {
+    "axios": "^0.20.0",
     "inquirer": "^7.3.3"
   }
 }
