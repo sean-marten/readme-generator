@@ -33,9 +33,9 @@ async function getUserInfo(username, repoName, authToken) {
   };
   const queryUrl = `https://api.github.com/users/${username}`;
   try {
-    const { avatar_url, email } = await axios.get(queryUrl, config);
-    if (avatar_url && email) {
-      readmeContent[8].content = `\nIf you have any questions, please contact me at ${email}\n\n![screenshot](${avatar_url})`;
+    const { data } = await axios.get(queryUrl, config);
+    if (data.avatar_url && data.email) {
+      readmeContent[8].content = `\nIf you have any questions, please contact me at ${data.email}\n\n![screenshot](${data.avatar_url})`;
     }
   } catch (err) {
     console.log(`Unable to retrieve Github user content, ${err}`);
@@ -64,10 +64,15 @@ function writeToFile(username, repoName) {
       fs.appendFileSync("./readme/README.md", badge);
     }
     let content = "";
-    const headingLevel = `${"#".repeat(item.headingLevel)} `;
-    const heading = `${item.heading}\n`;
     if (item.content) {
-      content = content.concat(headingLevel, heading, `${item.content}\n`);
+      let heading = "";
+      const headingLevel = `${"#".repeat(item.headingLevel)} `;
+      if (item.heading === "Title") {
+        content = content.concat(headingLevel, `${item.content}\n`);
+      } else {
+        heading = `${item.heading}\n`;
+        content = content.concat(headingLevel, heading, `${item.content}\n`);
+      }
     }
     fs.appendFileSync("./readme/README.md", content);
   });

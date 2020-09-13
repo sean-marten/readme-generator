@@ -101,3 +101,5 @@ const userPrompts = [
     message: "Provide examples for how to run your tests.",
   },
 ];
+
+module.exports = { readmeContent, userPrompts };
