@@ -33,6 +33,10 @@ const readmeContent = [
     headingLevel: 2,
     heading: "Tests",
   },
+  {
+    headingLevel: 2,
+    heading: "Questions",
+  },
 ];
 
 const userPrompts = [
@@ -52,39 +56,39 @@ const userPrompts = [
     message: "What is the title of your project?",
   },
   {
-    type: "input",
+    type: "editor",
     name: "description",
     message: "Write out the description for your ReadMe.",
   },
   {
-    type: "input",
+    type: "editor",
     name: "installation",
     message: "Please describe how to install your application.",
   },
   {
-    type: "input",
+    type: "editor",
     name: "usage",
     message: "Describe how to use your application.",
   },
   {
-    type: "input",
+    type: "editor",
     name: "credits",
     message:
       "List all of your collaborators. Include any noteworthy third-party assets or tutorials.",
   },
   {
-    type: "input",
+    type: "editor",
     name: "license",
     message:
       "Describe what other developers can and cannot do with your project.",
   },
   {
-    type: "input",
+    type: "editor",
     name: "contributing",
     message: "Write out how other developers may contribute to your project.",
   },
   {
-    type: "input",
+    type: "editor",
     name: "tests",
     message: "Provide examples for how to run your tests.",
   },
@@ -103,8 +107,11 @@ inquirer.prompt(userPrompts).then((answers) => {
     }
     console.log("Successfully created readme file.");
   });
+
   writeToFile();
 });
+
+function getUserInfo() {}
 
 function writeToFile() {
   readmeContent.forEach((item) => {

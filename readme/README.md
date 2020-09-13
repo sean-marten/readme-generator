@@ -1,17 +1,5 @@
-# Title
-Seanye
-## Description
-This is a desc
 ## Table of Contents
-[Title](#Title)
-
-[Description](#Description)
-
 [Installation](#Installation)
-
-[Usage](#Usage)
-
-[License](#License)
 
 [Credits](#Credits)
 
@@ -20,14 +8,10 @@ This is a desc
 [Tests](#Tests)
 
 ## Installation
-Weeeee
-## Usage
-Use it?
-## License
-Smarten
+asdkjf
 ## Credits
-Idk, whatever
+asdfgasdfsdgads
 ## Contributing
-DO a PR
+adfasdfdsfasd
 ## Tests
-Test it
+asdfasdgasdgds
