@@ -11,21 +11,31 @@ function init() {
 }
 
 function promptUser() {
-  console.log(
-    "If you have not read the README for this project, please do so before using."
-  );
-  inquirer.prompt(userPrompts).then((answers) => {
-    const answerArr = Object.values(answers);
-    for (let i = 4; i < answerArr.length; i++) {
-      readmeContent[i - 4].content = answerArr[i];
-    }
-    fs.writeFile("./readme/README.md", "", (err) => {
-      if (err) {
-        console.log(`Failed to generate README.md file, ${err}`);
+  inquirer
+    .prompt({
+      type: "confirm",
+      name: "readme",
+      message:
+        "If you have not read the README for this project, please do so before using. Have you read the README?",
+    })
+    .then((answer) => {
+      const { readme } = answer;
+      if (!readme) {
+        return;
       }
+      inquirer.prompt(userPrompts).then((answers) => {
+        const answerArr = Object.values(answers);
+        for (let i = 3; i < answerArr.length; i++) {
+          readmeContent[i - 3].content = answerArr[i];
+        }
+        fs.writeFile("./readme/README.md", "", (err) => {
+          if (err) {
+            console.log(`Failed to generate README.md file, ${err}`);
+          }
+        });
+        getUserInfo(answerArr[0], answerArr[1], answerArr[2]);
+      });
     });
-    getUserInfo(answerArr[0], answerArr[1], answerArr[2]);
-  });
 }
 
 async function getUserInfo(username, repoName, authToken) {

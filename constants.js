@@ -54,11 +54,6 @@ const userPrompts = [
     message: "Please enter a valid Github Auth token.",
   },
   {
-    type: "confirm",
-    name: "includeTOC",
-    message: "Would you like to include a table of contents?",
-  },
-  {
     type: "input",
     name: "title",
     message: "What is the title of your project?",
