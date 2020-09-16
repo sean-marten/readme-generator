@@ -8,8 +8,6 @@ Fun Fact: This README was made using the generator!
 
 ## Table of Contents
 
-[Title](#WriteMe)
-
 [Description](#Description)
 
 [Installation](#Installation)
@@ -43,7 +41,7 @@ In order to install this README generator, follow these instructions:
 
 ## Usage
 
-To use this REAMDE generator, make sure you are in the `readme-generator` folder and then you can simply run the following bash command:
+To use this REAMDE generator, make sure you are in the `writeme` folder and then you can simply run the following bash command:
 
 ```bash
 node index.js
@@ -60,10 +58,11 @@ After the initial prompts that require the above information, you will be prompt
 Some prompts open text editors for you to fill out your content, when prompted please do the following:
 
 1. Press `enter` to open the text editor in your CLI.
-2. Fill out your desired content.
-3. Press the `escape` key.
-4. Type `:wq`.
-5. Press `enter`.
+2. Press `i`
+3. Fill out your desired content.
+4. Press the `escape` key.
+5. Type `:wq`.
+6. Press `enter`.
 
 When filling out content for the README, please follow [markdown syntax](https://www.markdownguide.org/basic-syntax/) for including things such as links, lists, bullet points, snippets, etc.
 
