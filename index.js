@@ -63,6 +63,9 @@ function writeToFile(username, repoName) {
       let tcContent = "## Table of Contents\n";
       let tableOfContents = [];
       readmeContent.forEach((item) => {
+        if (item.heading === "Title") {
+          return;
+        }
         if (item.content) {
           tableOfContents.push(`[${item.heading}](#${item.heading})\n\n`);
         }

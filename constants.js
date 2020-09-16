@@ -75,15 +75,15 @@ const userPrompts = [
   },
   {
     type: "editor",
-    name: "credits",
-    message:
-      "List all of your collaborators. Include any noteworthy third-party assets or tutorials.",
-  },
-  {
-    type: "editor",
     name: "license",
     message:
       "Describe what other developers can and cannot do with your project.",
+  },
+  {
+    type: "editor",
+    name: "credits",
+    message:
+      "List all of your collaborators. Include any noteworthy third-party assets or tutorials.",
   },
   {
     type: "editor",
