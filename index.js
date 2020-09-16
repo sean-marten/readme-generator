@@ -11,6 +11,9 @@ function init() {
 }
 
 function promptUser() {
+  console.log(
+    "If you have not read the README for this project, please do so before using."
+  );
   inquirer.prompt(userPrompts).then((answers) => {
     const answerArr = Object.values(answers);
     for (let i = 4; i < answerArr.length; i++) {
