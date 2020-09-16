@@ -51,9 +51,9 @@ node index.js
 
 This generator will run you through a series of prompts. Please have the following information available:
 
-1. Your GitHub username
-2. The repo name that this README is for
-3. A personal GitHub Auth token (this is used to retrieve your GitHub email)
+* Your GitHub username
+* The repo name that this README is for
+* A personal GitHub Auth token (this is used to retrieve your GitHub email)
 
 After the initial prompts that require the above information, you will be prompted for desired content for each section of the README. If you wish to leave a section empty, it will not be included in the final README.
 
