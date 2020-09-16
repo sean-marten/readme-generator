@@ -1,4 +1,4 @@
-# README Generator
+# WriteMe
 
 ## Description
 
@@ -8,7 +8,7 @@ Fun Fact: This README was made using the generator!
 
 ## Table of Contents
 
-[Title](#Title)
+[Title](#WriteMe)
 
 [Description](#Description)
 
